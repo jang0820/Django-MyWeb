@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+
+{% load static %}
+{% block content %}
+{% if user.is_authenticated %}
+    <form action="{% url 'file:upload' %}" method="POST" enctype="multipart/form-data">
+        <input type="text" name="fileTitle" placeholder="Enter a title or Filename">
+        <input type="file"  name="uploadedFile">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="Upload">
+    </form>
+    <table  class="table table-dark">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Title or filename</th>
+            <th scope="col">Upload DateTime</th>
+            <th scope="col">User</th>
+            <th scope="col">Download</th>
+            <th scope="col">Delete</th>
+        </tr>
+        {% for file in files %}
+            <tr>
+                <td  scope="row">{{ file.id }}</td>
+                <td>{{ file.title }}</td>
+                <td>{{ file.dateTimeOfUpload }}</td>
+                <td>{{ file.user }}</td>
+                <td> <a href="{% url 'file:download' file.id %}">下載</a></td>
+                <td> <a href="{% url 'file:delete' file.id %}">删除</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+{% endblock %}
