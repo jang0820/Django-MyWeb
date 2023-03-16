@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="list-group list-group-flush">
+        <label class="list-group-item">標題：{{ object.title }}</label>
+        <p class="list-group-item">內容：{{ object.content }}</p>
+        <label class="list-group-item">建立日期：{{ object.created|date:'Y/m/d' }}</label>
+        <label class="list-group-item">點擊次數：{{ object.numclick }}</label>
+        <label class="list-group-item"> <a href="{% url 'news:download' object.pk 1 %}">下載附件1：{{ object.file1 }}</a></label>
+        <label class="list-group-item"> <a href="{% url 'news:download' object.pk 2 %}">下載附件1：{{ object.file2 }}</a></label>
+        <label class="list-group-item"> <a href="{% url 'news:download' object.pk 3 %}">下載附件1：{{ object.file3 }}</a></label>
+    </div>
+
+{% endblock  %}

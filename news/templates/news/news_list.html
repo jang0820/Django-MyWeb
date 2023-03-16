@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<p class="h2">最新消息</p>
+<table class="table">
+        <tr><a href="{% url 'news:create' %}" class="btn btn-success">新增公告</a></tr>
+        {% for news in object_list %}
+        <tr>
+            <td><a href="{% url 'news:detail' news.pk %}" >{{ news.title }}</a></td>
+            <td>{{ news.created }}</td>
+            <td>{{ news.numclick }}</td>
+            <td>{{ news.user }}</td>
+            <td style="text-align:right;">
+                <a href="{% url 'news:update' news.pk %}" class="btn btn-success">修改</a>
+                <a href="{% url 'news:delete' news.pk %}" class="btn btn-danger">刪除</a>
+                <a href="{% url 'news:detail' news.pk %}" class="btn btn-info">明細</a>
+            </td>
+        </tr>
+        {% endfor %}
+</table>
+
+{% endblock  %}
